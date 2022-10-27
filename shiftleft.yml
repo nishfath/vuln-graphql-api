@@ -2,11 +2,14 @@ build_rules:
   - id: "No critical or high SAST findings"
     finding_types:
       - vuln
-      - secret
     cvss_31_severity_ratings:
       - critical
       - high
     threshold: 0
+  - id: "Allow 0 secrets"
+    finding_types:
+      - secret
+    threshold: 0  
     options:
       num_findings: 10 # Return 10 sast findings
   - id: "No reachable SCA findings"
@@ -28,3 +31,7 @@ build_rules:
     threshold: 0
     options:
       num_findings: 10 # Return 10 container findings
+# The above rule is perhaps the most common in that it
+# is designed to be used with Pull Request and to block
+# new vulns from being introduced that aren't already on
+# the 'main' branch
